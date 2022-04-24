@@ -4,7 +4,8 @@ const path = require("path");
 const dotenv = require("dotenv");
 
 dotenv.config({ path: "./.env" });
-//connection to database
+
+//Creat Connection
 const db = mysql.createConnection({
   host: process.env.HOST,
   user: process.env.USER,
@@ -12,7 +13,7 @@ const db = mysql.createConnection({
   database: process.env.DATABASE,
 });
 
-//connect to sql
+//Connect to DataBase
 db.connect((err) => {
   if (err) {
     console.log(err);
@@ -51,13 +52,34 @@ app.post("/user", (req, res) => {
     // const username = req.body.username;
     // const pw = req.body.password;
     let valuePosting = req.body;
-    const sql = "INSERT INTO testconnect SET ?";
-    console.log(valuePosting);
+    const sql = "INSERT INTO students SET ?";
+    // console.log(valuePosting);
     db.query(sql, valuePosting, (err) => {
       if (err) {
         console.log(err);
       } else {
-        res.status(200).json({ message: "Inserted data successfully" });
+        res.status(200).json({ message: "Inserted student data successfully" });
+      }
+    });
+  } catch {
+    console.log(err);
+    res.status(500).json({
+      status: "Fail",
+      message: "Server Error!",
+    });
+  }
+});
+
+app.post("/faculty", (req, res) => {
+  try {
+    let valuePosting = req.body;
+    const sql = "INSERT INTO faculty SET ?";
+    // console.log(valuePosting);
+    db.query(sql, valuePosting, (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(200).json({ message: "Inserted faculty data successfully" });
       }
     });
   } catch {

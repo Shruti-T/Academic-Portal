@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
   </head>
   <script>
-    function sendMessage() {
-      const form = new FormData(document.getElementById("userSubmit"));
+    function sendMessage(formid,path) {
+      const form = new FormData(document.getElementById(formid));
       let formBody = [];
       for (let key of form.keys()) {
         const encodedKey = encodeURIComponent(key);
@@ -18,7 +19,7 @@
       }
       formBody = formBody.join("&");
 
-      fetch("/user", {
+      fetch("/"+path, {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -33,36 +34,50 @@
     }
   </script>
   <body>
-    <div class="container" id="container">
+    <div class="pgtitle"><h1>Welcome! Insert Your Details.</h1></div>
+
+    <div class="container box" id="container">
       <div class="form-container sign-up-container">
         <form action="/user" method="post" id="userSubmit">
-          <h1>Create Account</h1>
+          <h1>Insert Student</h1>
           <div class="social-container">
-            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social">
+              <box-icon type="solid" name="school"></box-icon>
+            </a>
+
+            <a href="#" class="social"
+              ><box-icon name="spreadsheet"></box-icon
+            ></a>
+            <a href="#" class="social"
+              ><box-icon name='user'></box-icon></box-icon
+            ></a>
           </div>
-          <span>or use your email for registration</span>
+          <span>Insert your student details here.</span>
           <input type="text" placeholder="username" name="studentName" />
           <input type="number" placeholder="phoneNumber" name="studentphone" />
           <input type="text" placeholder="Address" name="studentAddress" />
           <input type="text" placeholder="Branch" name="studentBranch" />
-          <button class="Pgbtns" type="submit" id="submitBtn">Sign Up</button>
+          <button class="Pgbtns" type="submit" id="submitBtn">Insert</button>
         </form>
       </div>
       <div class="form-container sign-in-container">
-        <form action="#">
-          <h1>Sign in</h1>
+        <form action="/faculty" method="post" id="facultySubmit">
+          <h1>Insert Faculty</h1>
           <div class="social-container">
-            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social"
+              ><box-icon type="logo" name="microsoft-teams"></box-icon
+            ></a>
+            <a href="#" class="social"
+              ><box-icon type='solid' name='pen'></box-icon></box-icon
+            ></a>
+            <a href="#" class="social"
+              ><box-icon type="solid" name="group"></box-icon
+            ></a>
           </div>
-          <span>or use your account</span>
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
-          <a href="#">Forgot your password?</a>
-          <button class="Pgbtns">Sign In</button>
+          <span>Insert the faculty details here.</span>
+          <input type="text" placeholder="Name" name="facultyName" />
+          <input type="text" placeholder="Branch"name="facultyBranch" />
+          <button class="Pgbtns" type="submit">Insert</button>
         </form>
       </div>
       <div class="overlay-container">
@@ -70,14 +85,18 @@
           <div class="overlay-panel overlay-left">
             <h1>Welcome Back!</h1>
             <p>
-              To keep connected with us please login with your personal info
+              Want to create a <i><b>faculty memeber?</b></i> Click on the
+              "Create" button to get started!
             </p>
-            <button class="ghost Pgbtns" id="signIn">Sign In</button>
+            <button class="ghost Pgbtns" id="signIn">Create</button>
           </div>
           <div class="overlay-panel overlay-right">
-            <h1>Hello, Friend!</h1>
-            <p>Enter your personal details and start journey with us</p>
-            <button class="ghost Pgbtns" id="signUp">Sign Up</button>
+            <h1>Hello!</h1>
+            <p>
+              Want to insert a <i><b>new student?</b></i> Click on the "Create"
+              button to get started!
+            </p>
+            <button class="ghost Pgbtns" id="signUp">Create</button>
           </div>
         </div>
       </div>
@@ -98,7 +117,12 @@
 
     document.getElementById("userSubmit").addEventListener("submit", (data) => {
       data.preventDefault();
-      sendMessage();
+      sendMessage("userSubmit","user");
     });
+
+    document.getElementById("facultySubmit").addEventListener("submit", (data) => {
+        data.preventDefault();
+        sendMessage("facultySubmit","faculty");
+      });
   </script>
 </html>
