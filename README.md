@@ -1,2 +1,4 @@
 # MySqlStudentdb
-A simple Mysql Student Database connection via nodejs.
+
+A simple Mysql Institute Database connection via nodejs.
+User can insert a faculty or student details to the database.
