@@ -49,8 +49,6 @@ app.get("/user", (req, res) => {
 
 app.post("/user", (req, res) => {
   try {
-    // const username = req.body.username;
-    // const pw = req.body.password;
     let valuePosting = req.body;
     const sql = "INSERT INTO student SET ?";
     // console.log(valuePosting);
