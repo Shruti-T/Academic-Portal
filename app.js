@@ -24,7 +24,7 @@ db.connect((err) => {
 
 const app = express();
 app.listen("3000", () => {
-  console.log("Listening to port 3000", process.env.HOST);
+  console.log("Listening to port 3000");
 });
 
 app.use(express.static(path.join(__dirname, "./public")));
@@ -52,7 +52,7 @@ app.post("/user", (req, res) => {
     // const username = req.body.username;
     // const pw = req.body.password;
     let valuePosting = req.body;
-    const sql = "INSERT INTO students SET ?";
+    const sql = "INSERT INTO student SET ?";
     // console.log(valuePosting);
     db.query(sql, valuePosting, (err) => {
       if (err) {
