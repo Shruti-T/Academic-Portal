@@ -23,8 +23,9 @@ db.connect((err) => {
 });
 
 const app = express();
-app.listen("8000", () => {
-  console.log("Listening to port 8000");
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log("Listening to port", port);
 });
 
 app.use(express.static(path.join(__dirname, "./public")));
