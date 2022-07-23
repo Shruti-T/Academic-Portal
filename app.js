@@ -34,6 +34,20 @@ app.use(express.json());
 app.set("views", path.join(__dirname, "./views"));
 app.set("view engine", "ejs");
 
+app.get("/", (req, res) => {
+  try {
+    res.render("UserInsert", {
+      title: "User Add",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      status: "Fail",
+      message: "Server Error!",
+    });
+  }
+});
+
 app.get("/user", (req, res) => {
   try {
     res.render("UserInsert", {
