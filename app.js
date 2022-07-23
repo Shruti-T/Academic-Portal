@@ -23,8 +23,8 @@ db.connect((err) => {
 });
 
 const app = express();
-app.listen("3000", () => {
-  console.log("Listening to port 3000");
+app.listen("8000", () => {
+  console.log("Listening to port 8000");
 });
 
 app.use(express.static(path.join(__dirname, "./public")));
@@ -88,3 +88,22 @@ app.post("/faculty", (req, res) => {
     });
   }
 });
+
+// app.post("/update", (req, res) => {
+//   try {
+//     let valuePosting = { facultyName: "poonam" };
+//     const sql = "UPDATE faculty SET ? WHERE idfaculty=1";
+//     db.query(sql, valuePosting, (err) => {
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         res.status(200).json({ message: "Updated faculty data successfully" });
+//       }
+//     });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json({
+//       status: "Fail",
+//     });
+//   }
+// });
