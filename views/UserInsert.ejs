@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="./favicon.png">
     <link rel="icon" href="./favicon.png">
-    <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+    <!-- <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script> -->
   </head>
   <script>
     function sendMessage(formid,path) {
       const form = new FormData(document.getElementById(formid));
+      console.log(form,'-------')
       let formBody = [];
       for (let key of form.keys()) {
         const encodedKey = encodeURIComponent(key);
@@ -20,7 +21,6 @@
         formBody.push(encodedKey + "=" + encodedValue);
       }
       formBody = formBody.join("&");
-
       fetch("/"+path, {
         method: "POST",
         headers: {

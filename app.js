@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("mysql2");
 const path = require("path");
 const dotenv = require("dotenv");
+const { fileLoader } = require("ejs");
 
 dotenv.config({ path: "./.env" });
 
@@ -66,7 +67,7 @@ app.post("/user", (req, res) => {
   try {
     let valuePosting = req.body;
     const sql = "INSERT INTO student SET ?";
-    // console.log(valuePosting);
+    console.log(valuePosting);
     db.query(sql, valuePosting, (err) => {
       if (err) {
         console.log(err);
